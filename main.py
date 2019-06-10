@@ -18,16 +18,16 @@ def all():
     return render_template('donations.jinja2', donations=donations)
 
 
-@app.route('/create', methods=['GET', 'POST'])
+@app.route('/create/', methods=['GET', 'POST'])
 def create():
-    if request.method == 'POST':
-        donor = Donor(name=request.form['name'])
-        donor.save()
-        donation = Donation(value=request.form['donation'])
-        donation.save()
-        return redirect(url_for('all'))
-    else:
-        return render_template('create.jinja2')
+##     if request.method == 'POST':
+##         donor = Donor(name=request.form['name'])
+##         donor.save()
+##         donation = Donation(value=request.form['donation'])
+##         donation.save()
+##         return redirect(url_for('all'))
+##     else:
+    return render_template('create.jinja2')
 
 
 if __name__ == "__main__":
