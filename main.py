@@ -1,5 +1,4 @@
 import os
-import base64
 from flask import Flask, render_template, request, redirect, url_for, session
 from model import Donation, Donor
 
@@ -20,14 +19,13 @@ def all():
 
 @app.route('/create/', methods=['GET', 'POST'])
 def create():
-##     if request.method == 'POST':
-##         donor = Donor(name=request.form['name'])
-##         donor.save()
-##         donation = Donation(value=request.form['donation'])
-##         donation.save()
-##         return redirect(url_for('all'))
-##     else:
-    return render_template('create.jinja2')
+    if request.method == 'POST':
+         donor_id = Donor.get(name=request.form['name']).get_id()
+         donation = Donation(donor_id=donor_id, value=request.form['donation'])
+         donation.save()
+         return redirect(url_for('all'))
+    else:
+        return render_template('create.jinja2')
 
 
 if __name__ == "__main__":
